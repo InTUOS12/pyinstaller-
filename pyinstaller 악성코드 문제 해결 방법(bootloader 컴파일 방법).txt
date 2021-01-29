@@ -1,0 +1,45 @@
+pyinstaller로 만든 실행파일을 Trojan 바이러스로 인식하는 문제 해결법
+
+(파이썬 bootloader 컴파일 방법)
+https://stackoverflow.com/questions/53584395/how-to-recompile-the-bootloader-of-pyinstaller 번역 및
+https://jasmine125.tistory.com/1009 실행 방법 리워크 (// dlwnsgml0900@nave.com)
+
+
+		/*         pyinstaller로 만든 실행파일을 Trojan 바이러스로 인식하는 문제 해결법              */
+
+결론부터 말하자면 pyinstaller 안에 있는 bootloader를 자신의 pc 환경에 맞게 빌드를 해야 합니다. 
+
+인터넷에 떠돌아 다니는 자료나 기타 방법들은 영어로 되어 있는 경우가 많아 읽거나 이해하는데 어려움이 있을거라 판단하여 한글로
+번역하고, 좀 더 쉽게 cmd 실행 창에서도 가능하게 끔 리워크를 해 보았습니다. 좀 더 자세하게 이해하거나 컴파일 하고 싶으시면
+위 주소로 들어가시면 됩니다.
+
+python3 나 visual studio C++ 컴파일러 실행 안하셔도 됩니다!! 윈도우에 있는 cmd 실행 창에서도 가능합니다. 
+
+만약 트로이 목마같은 바이러스 탐지 때문에 위험하다고 생각되시면 안하시면 됩니다. 
+저는 github의 pyinstaller가 바이러스 탐지로 오인되는 것을 알고 있기 때문에 이렇게 한 것입니다.
+후에 발생하는 문제에 대해 저는 책임지지 않습니다.
+
+밑에 내용은 파이썬 bootloader 컴파일 방법을 서술한 것 입니다.
+
+1. github pyinstaller 다운 및 압축 풀기 // 알약에서 트로이 목마 탐지 시 실시간 감시 끈 후 압축 풀기
+
+2. 윈도우 + R 후 cmd 창 실행 
+
+// 이 다음 부터 cmd 창입니다. 입력하라는 순서대로 입력하시면 됩니다.
+
+3. "cd\" 입력 //
+
+4. "cd pyinstaller 파일을 압축 풀어놓은 주소" 입력 // 파일 내 bootloader 라는 파일이 보일 때 까지 탐색 후 주소창 클릭하면 됩니다.
+ex) cd C:\Users\사용자\pyinstaller-develop 입력 -- 이 다음 bootloader 라는 파일이 있습니다. 
+
+주의!! 너무 긴 경로를 입력시 오류가 뜰 수 있습니다. 파일을 다른 짧은 경로로 옮기기 바랍니다.
+ex) C:\Users\사용자\download\pyinstaller-develop\pyinstaller-develop --> C:\Users\사용자\pyinstaller-develop
+
+5. "cd bootloader" 입력
+
+6. "python ./waf distclean all --target-arch=64bit" 입력 (띄어쓰기 주의) // 부트로더 빌드 실행 명령어
+
+7. "cd.." 입력
+
+8. "python .\setup.py install" 입력 // 빌드 된 pyinstaller 설치 실행 명령어
+
